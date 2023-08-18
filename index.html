@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="modal.css" />
+</head>
+
+<body>
+    <div style="margin: 40px; width: 90%; display: flex;">
+        <div style="width: 80%">
+            <button type="button" class="btn btn-primary" onclick="openModal()">
+                Add new Node
+            </button>
+            <button type="button" class="btn btn-danger" onclick="run()">
+                Run
+            </button>
+        </div>
+
+        <div style="width: 19%; text-align: right;">
+            <button type="button" class="btn btn-success" onclick="saveWork()">
+                Save Work
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="saveWork()">
+                Load Work
+            </button>
+        </div>
+    </div>
+
+    <div id="mpopupBox" class="mpopup">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal()">×</span>
+                <h2>Add New Node</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label for="" class="form-label">Name</label>
+                    <input id="inpNodeName" name="nodeName" type="text" class="form-control">
+                </div>
+                <div>
+                    <label for="" class="form-label">Type</label>
+                    <select name="nodeType" id="slcNodeType" class="form-select" onchange="changeNodeTypeModal()">
+                        <option value="getRequest">Get Request</option>
+                        <option value="postRequest">Post Request</option>
+                        <option value="parserData">Parser Data</option>
+                    </select>
+
+                    <div id="dvTypeGet">
+                        <div>
+                            <label for="" class="form-label">URL</label>
+                            <input id="inpUrlGet" name="urlGet" type="text" class="form-control">
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Params</label>
+                            <input id="inpParamsGet" name="paramsGet" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div id="dvTypePost" style="display: none;">
+                        <div>
+                            <label for="" class="form-label">URL</label>
+                            <input id="inpUrlPost" name="urlPost" type="text" class="form-control">
+                        </div>
+                        <div>
+                            <label for="" class="form-label">Body</label>
+                            <input id="inpBodyPost" name="bodyPost" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="" class="form-label">Color</label>
+                    <input id="inpNodeColor" name="nodeColor" type="color" class="form-control form-control-color">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="createNewNode()">
+                    Add
+                </button>
+                <button type="button" class="btn btn-warning" onclick="closeModal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="myDiagramDiv" style="width:100%; height:500px; background-color: #DAE4E4;"></div>
+
+    <script src="https://unpkg.com/gojs/release/go-debug.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const $ = go.GraphObject.make;
+
+        const myDiagram =
+            new go.Diagram("myDiagramDiv", { "undoManager.isEnabled": true });
+
+        myDiagram.nodeTemplate = $(go.Node, "Auto",
+            $(go.Shape, "Rectangle",
+                {
+                    stroke: null,
+                    portId: "",
+                    cursor: "pointer",
+                    fromLinkable: true,
+                    fromLinkableSelfNode: true,
+                    fromLinkableDuplicates: true,
+                    toLinkable: true,
+                    toLinkableSelfNode: true,
+                    toLinkableDuplicates: true
+                },
+                new go.Binding("fill", "color")),
+            $(go.TextBlock,
+                { margin: 6, font: "18px sans-serif" },
+                new go.Binding("text"))
+        );
+
+        // myDiagram.model = new go.TreeModel([
+        //     { key: 1, text: "Alpha", color: "lightblue" },
+        //     { key: 2, text: "Beta", color: "orange" },
+        //     { key: 3, text: "Gamma", color: "lightgreen" },
+        //     { key: 4, text: "Delta", color: "pink" }
+        // ]);
+
+        var mpopup = document.getElementById("mpopupBox");
+        var myDiagramDiv = document.getElementById('myDiagramDiv');
+
+        function saveWork() {
+
+        }
+
+        function loadWork() {
+
+        }
+
+        function openModal() {
+            mpopup.style.display = "block";
+            myDiagramDiv.style.zIndex = -1;
+        }
+
+        function closeModal() {
+            mpopup.style.display = "none";
+            myDiagramDiv.style.zIndex = 0;
+        }
+
+        function changeNodeTypeModal() {
+            let nodeType = document.getElementById("slcNodeType").value
+
+            if (nodeType == "getRequest") {
+                document.getElementById("dvTypeGet").style.display = ""
+                document.getElementById("dvTypePost").style.display = "none"
+            }
+
+            if (nodeType == "postRequest") {
+                document.getElementById("dvTypePost").style.display = ""
+                document.getElementById("dvTypeGet").style.display = "none"
+            }
+
+            if (nodeType == "parserData") {
+
+            }
+        }
+
+        function createNewNode() {
+            closeModal()
+
+            let nodeName = document.getElementById("inpNodeName").value
+            let nodeColor = document.getElementById("inpNodeColor").value
+
+            const data = { text: nodeName, color: nodeColor };
+            myDiagram.model.addNodeData(data);
+            const node = myDiagram.findPartForData(data);
+            node.location = myDiagram.lastInput.documentPoint;
+        }
+
+        function run() {
+            console.log(myDiagram.model.toJson())
+        }
+    </script>
+</body>
+
+</html>
