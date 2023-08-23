@@ -3,3 +3,5 @@ waitress==2.1.2
 python-dotenv==1.0.0
 sqlmodel==0.0.8
 mysqlclient==2.2.0
+dataclasses-json==0.5.14
+requests==2.31.0
