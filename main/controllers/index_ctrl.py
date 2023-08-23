@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
+from main.services.flowchart.flowchart_run_sv import FlowchartRunSv
 
 bp = Blueprint(
     "index",
@@ -9,5 +10,10 @@ bp = Blueprint(
 
 class IndexCtrl:
     @bp.route("/", methods=["GET"])
-    def inicial_json():
+    def index():
         return render_template("index.html")
+
+    @bp.route("/run", methods=["POST"])
+    def run():
+        result = FlowchartRunSv().execute(request.json)
+        return result, 200
