@@ -11,7 +11,7 @@ bp = Blueprint(
 class IndexCtrl:
     @bp.route("/", methods=["GET"])
     def index():
-        return render_template("index.html")
+        return render_template("flowchart/index.html")
 
     @bp.route("/run", methods=["POST"])
     def run():
