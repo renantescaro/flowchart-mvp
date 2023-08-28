@@ -11,10 +11,15 @@ bp = Blueprint(
 class WorkCtrl:
     @bp.route("/save", methods=["POST"])
     def save_work():
-        ...
+        
 
-    @bp.route("/load", methods=["GET"])
-    def load_work():
+    @bp.route("/list", methods=["GET"])
+    def list_work():
+        params = [{"id": 1, "name": "teste", "description": "only a test"}]
+        return params, 200
+
+    @bp.route("/load/<id>", methods=["GET"])
+    def load_work(id):
         params = {
             "class": "GraphLinksModel",
             "nodeDataArray": [
