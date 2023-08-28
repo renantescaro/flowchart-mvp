@@ -1,0 +1,27 @@
+<div id="modalSaveWork" class="mpopup">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="closeModalSaveWork()">x</span>
+            <h2>Save Work</h2>
+        </div>
+        <div class="modal-body">
+            <div>
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="iptNameSaveWork">
+            </div>
+            <div>
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" id="iptDescriptionSaveWork">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="saveWork()">
+                Save
+            </button>
+            <button type="button" class="btn btn-warning" onclick="closeModalSaveWork()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

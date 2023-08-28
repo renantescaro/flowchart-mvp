@@ -1,0 +1,72 @@
+<div id="mpopupBox" class="mpopup">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="closeModal()">×</span>
+            <h2>Add New Node</h2>
+        </div>
+        <div class="modal-body">
+            <div>
+                <label for="" class="form-label">Name</label>
+                <input id="inpNodeName" name="nodeName" type="text" class="form-control">
+            </div>
+            <div>
+                <label for="" class="form-label">Type</label>
+                <select name="nodeType" id="slcNodeType" class="form-select" onchange="changeNodeTypeModal()">
+                    <option value="getRequest">Get Request</option>
+                    <option value="postRequest">Post Request</option>
+                    <option value="parserData">Parser Data</option>
+                </select>
+
+                <div id="dvTypeGet">
+                    <div>
+                        <label for="" class="form-label">URL</label>
+                        <input id="inpUrlGet" name="urlGet" type="text" class="form-control">
+                    </div>
+                    <div>
+                        <label for="" class="form-label">Params</label>
+                        <input id="inpParamsGet" name="paramsGet" type="text" class="form-control">
+                    </div>
+                </div>
+                <div id="dvTypePost" style="display: none;">
+                    <div>
+                        <label for="" class="form-label">URL</label>
+                        <input id="inpUrlPost" name="urlPost" type="text" class="form-control">
+                    </div>
+                    <div>
+                        <label for="" class="form-label">Body</label>
+                        <input id="inpBodyPost" name="bodyPost" type="text" class="form-control">
+                    </div>
+                    <div>
+                        <label for="" class="form-label">Headers</label>
+                        <input id="inpHeadersPost" name="headersPost" type="text" class="form-control">
+                    </div>
+                </div>
+                <div id="dvTypeParser" style="display: none;">
+                    <div>
+                        <label for="" class="form-label">Data Input</label>
+                        <textarea id="inpDataInputParser" name="dataInputParser" class="form-control" cols="30"
+                            rows="10"></textarea>
+                    </div>
+                    <div>
+                        <label for="" class="form-label">Data Exit</label>
+                        <textarea id="inpDataExitParser" name="dataExitParser" class="form-control" cols="30"
+                            rows="10"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="" class="form-label">Color</label>
+                <input id="inpNodeColor" name="nodeColor" type="color" class="form-control form-control-color">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="createNewNode()">
+                Add
+            </button>
+            <button type="button" class="btn btn-warning" onclick="closeModal()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
