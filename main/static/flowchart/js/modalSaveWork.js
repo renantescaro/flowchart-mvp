@@ -17,6 +17,10 @@ function saveWork() {
             myDiagram.model = new go.GraphLinksModel(JSON.parse(post.responseText));
             closeModalSaveWork()
         }
+        else if (post.readyState == 4 && post.status == 400) {
+            closeModalSaveWork()
+            alert("Error to save!")
+        }
     }
 }
 

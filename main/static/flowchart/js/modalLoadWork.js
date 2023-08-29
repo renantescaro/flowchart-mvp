@@ -38,6 +38,17 @@ function listWorks() {
                 }
                 tdBtn.append(btnSelect)
 
+                let btnDelete = document.createElement("button")
+                btnDelete.className = "btn btn-danger"
+                btnDelete.textContent = "Delete"
+                btnDelete.onclick = function () {
+                    if (confirm("Do you really want to delete?")) {
+                        deleteWork(e["id"])
+                        closeModalLoadWork()
+                    }
+                }
+                tdBtn.append(btnDelete)
+
                 tr.append(tdId)
                 tr.append(tdName)
                 tr.append(tdDescription)
@@ -45,6 +56,25 @@ function listWorks() {
 
                 bodyModalLoadWork.append(tr)
             });
+        }
+    }
+}
+
+function deleteWork(idWork) {
+    var post = new XMLHttpRequest()
+    post.open("POST", "/work/delete", true)
+    post.setRequestHeader("Content-Type", "application/json");
+    post.send(JSON.stringify({
+        "id": idWork
+    }))
+    post.onreadystatechange = function () {
+        if (post.readyState == 4 && post.status == 200) {
+            // JSON.parse(post.responseText)
+            alert("Deleted")
+        }
+        else if (post.readyState == 4 && post.status == 400) {
+            // JSON.parse(post.responseText)
+            alert("Error!")
         }
     }
 }
