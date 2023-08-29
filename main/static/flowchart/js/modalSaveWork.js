@@ -4,12 +4,13 @@ var myDiagramDiv = document.getElementById('myDiagramDiv');
 
 function saveWork() {
     let post = new XMLHttpRequest()
-    let body = {
-        name: document.getElementById('iptNameSaveWork').value,
-        description: document.getElementById('iptDescriptionSaveWork').value,
-        data: myDiagram.model.toJson()
-    }
+    let body = JSON.stringify({
+        "name": document.getElementById('iptNameSaveWork').value,
+        "description": document.getElementById('iptDescriptionSaveWork').value,
+        "data": myDiagram.model.toJson()
+    })
     post.open("POST", "/work/save", true)
+    post.setRequestHeader("Content-Type", "application/json");
     post.send(body)
     post.onreadystatechange = function () {
         if (post.readyState == 4 && post.status == 200) {

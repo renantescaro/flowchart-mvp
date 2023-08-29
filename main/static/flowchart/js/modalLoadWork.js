@@ -17,6 +17,7 @@ function listWorks() {
             let response = JSON.parse(get.responseText)
 
             let bodyModalLoadWork = document.getElementById("bodyModalLoadWork")
+            bodyModalLoadWork.innerHTML = null
             response.forEach(e => {
                 let tr = document.createElement("tr")
                 let tdId = document.createElement("td")
@@ -54,7 +55,7 @@ function loadWorks(idWork) {
     get.send()
     get.onreadystatechange = function () {
         if (get.readyState == 4 && get.status == 200) {
-            myDiagram.model = new go.GraphLinksModel(JSON.parse(get.responseText));
+            myDiagram.model = new go.GraphLinksModel(JSON.parse(get.responseText)['data']);
         }
     }
 }
