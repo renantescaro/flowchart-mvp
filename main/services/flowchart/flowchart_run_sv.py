@@ -1,5 +1,5 @@
 import requests
-from typing import Dict
+from typing import Any, Dict, Tuple
 from main.services.flowchart.parser_sv import ParserSv
 from main.entities.node_kinds import (
     FlowchartParams,
@@ -34,7 +34,7 @@ class FlowchartRunSv:
 
         self.params.node_data = data_orderly
 
-    def execute(self, params: Dict):
+    def execute(self, params: Dict) -> Tuple[Any, int]:
         self.params: FlowchartParams = FlowchartParams.from_dict(params)
 
         self.order_by_link()
@@ -60,8 +60,13 @@ class FlowchartRunSv:
                     params=get_request.params,
                 )
                 print(result.status_code)
-                if result.status_code == get_request.status_code:
-                    iteration_result = result.json()
+                if result.status_code != get_request.status_code:
+                    return (
+                        f"node: {node.text}, response: {result.content}",
+                        result.status_code,
+                    )
+
+                iteration_result = result.json()
 
             # Post Request
             if node.data_content.get("nodeType") == "postRequest":
@@ -77,7 +82,11 @@ class FlowchartRunSv:
                     headers=post_request.headers,
                 )
                 print(result.status_code)
-                if result.status_code == post_request.status_code:
-                    iteration_result = result.json()
+                if result.status_code != post_request.status_code:
+                    return (
+                        f"node: {node.text}, response: {result.content}",
+                        result.status_code,
+                    )
 
-        return {}
+                iteration_result = result.json()
+        return {}, 200

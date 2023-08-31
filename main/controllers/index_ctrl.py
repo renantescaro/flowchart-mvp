@@ -15,5 +15,5 @@ class IndexCtrl:
 
     @bp.route("/run", methods=["POST"])
     def run():
-        result = FlowchartRunSv().execute(request.json)
-        return result, 200
+        content, status_code = FlowchartRunSv().execute(request.json)
+        return content, status_code
