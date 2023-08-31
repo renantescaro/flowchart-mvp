@@ -1,3 +1,4 @@
+from typing import Optional
 from flask import Blueprint, render_template, request
 
 from main.database.models.database import Database
@@ -24,20 +25,32 @@ class WorkCtrl:
             print(e)
             return {}, 400
 
+    @staticmethod
+    @bp.route("/save/<id>", methods=["POST"])
     @bp.route("/save", methods=["POST"])
-    def save_work():
+    def save_work(id: Optional[int] = None):
         try:
             name = request.json.get("name")
             description = request.json.get("description")
+            data = request.json.get("data")
             if not name or not description:
                 return {}, 400
 
-            user_group_access = Work(
+            if id:
+                work = WorkRepository.get_by_id(id)
+                work.name = name
+                work.description = description
+                work.data = data
+
+                Database().save(work)
+                return {}, 200
+
+            work = Work(
                 name=name,
                 description=description,
-                data=request.json.get("data"),
+                data=data,
             )
-            Database().save(user_group_access)
+            Database().save(work)
             return {}, 200
 
         except Exception as e:

@@ -27,6 +27,8 @@ function createWorksTableList(dataTableList) {
         btnSelect.className = "btn btn-primary"
         btnSelect.textContent = "Select"
         btnSelect.onclick = function () {
+            document.getElementById("inpWorkId").value = e["id"]
+            document.getElementById("h2WorkTitle").textContent = e["name"]
             loadWorks(e["id"])
             closeModalLoadWork()
         }
@@ -89,7 +91,12 @@ function loadWorks(idWork) {
     get.send()
     get.onreadystatechange = function () {
         if (get.readyState == 4 && get.status == 200) {
-            myDiagram.model = new go.GraphLinksModel(JSON.parse(get.responseText)['data']);
+            dataContent = JSON.parse(get.responseText)
+
+            document.getElementById('iptNameSaveWork').value = dataContent.name
+            document.getElementById('iptDescriptionSaveWork').value = dataContent.description
+
+            myDiagram.model = new go.GraphLinksModel(dataContent['data']);
         }
     }
 }

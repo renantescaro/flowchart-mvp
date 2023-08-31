@@ -40,7 +40,6 @@ class ParserSv:
 
             if type(node[index]) is list:
                 print("List: ", node[index])
-                print("List: ", node[index])
                 for sub_index in range(len(node[index])):
                     if str(node[index][sub_index]).find("((") > -1:
                         key = str(node[index][sub_index]).strip()

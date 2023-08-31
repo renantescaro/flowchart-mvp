@@ -34,6 +34,12 @@ myDiagram.nodeTemplate = $(go.Node, "Auto",
 );
 
 function newFlowchart() {
+    document.getElementById('iptNameSaveWork').value = ""
+    document.getElementById('iptDescriptionSaveWork').value = ""
+
+    document.getElementById('h2WorkTitle').value = ""
+    document.getElementById('inpWorkId').value = ""
+
     myDiagram.model = new go.GraphLinksModel();
 }
 
