@@ -1,24 +1,36 @@
 const $ = go.GraphObject.make;
-const myDiagram = new go.Diagram("myDiagramDiv", { "undoManager.isEnabled": true });
+const myDiagram = new go.Diagram("myDiagramDiv", {
+    "undoManager.isEnabled": true
+});
 
 
 myDiagram.nodeTemplate = $(go.Node, "Auto",
-    $(go.Shape, "Rectangle",
-        {
-            stroke: null,
-            portId: "",
-            cursor: "pointer",
-            fromLinkable: true,
-            fromLinkableSelfNode: true,
-            fromLinkableDuplicates: true,
-            toLinkable: true,
-            toLinkableSelfNode: true,
-            toLinkableDuplicates: true
-        },
-        new go.Binding("fill", "color")),
+    $(go.Shape, "RoundedRectangle", {
+        stroke: null,
+        portId: "",
+        cursor: "pointer",
+        fromLinkable: true,
+        fromLinkableSelfNode: true,
+        fromLinkableDuplicates: true,
+        toLinkable: true,
+        toLinkableSelfNode: true,
+        toLinkableDuplicates: true,
+    },
+        new go.Binding("fill", "color")
+    ),
     $(go.TextBlock,
-        { margin: 6, font: "18px sans-serif" },
-        new go.Binding("text"))
+        {
+            textAlign: "start",
+            margin: 30,
+            font: "18px sans-serif"
+        },
+        new go.Binding("text")
+    ),
+    {
+        click: (e, node) => {
+            openEditModal(node.data)
+        },
+    }
 );
 
 function newFlowchart() {
@@ -42,9 +54,9 @@ function run() {
 
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log(JSON.parse(xhr.responseText));
+            alert("Executed successfully! Response: " + xhr.responseText)
         } else {
-            console.log(`Error: ${xhr.status}`);
+            alert(`status code ${xhr.status}\n\nError ${xhr.responseText}`);
         }
     };
     xhr.send(body);
@@ -64,6 +76,32 @@ function createNewNode() {
 
     node.location = myDiagram.lastInput.documentPoint;
     console.log(node.location)
+}
+
+function getNodeDataIndexByKey(key) {
+    for (let index = 0; index < myDiagram.model.nodeDataArray.length; index++) {
+        if (myDiagram.model.nodeDataArray[index].key == key) {
+            return index
+        }
+    }
+}
+
+function changeNode() {
+    closeModal()
+
+    let key = document.getElementById("inpNodeKey").value
+    let nodeName = document.getElementById("inpNodeName").value
+    let nodeColor = document.getElementById("inpNodeColor").value
+    let dataContent = getdata()
+    let index = getNodeDataIndexByKey(key)
+    console.log(`key ${key}, index ${index}`)
+
+    console.log("myDiagram.model")
+    console.log(myDiagram.model.nodeDataArray[index])
+
+    myDiagram.model.setDataProperty(myDiagram.model.nodeDataArray[index], "text", nodeName)
+    myDiagram.model.setDataProperty(myDiagram.model.nodeDataArray[index], "color", nodeColor)
+    myDiagram.model.setDataProperty(myDiagram.model.nodeDataArray[index], "dataContent", dataContent)
 }
 
 function getdata() {

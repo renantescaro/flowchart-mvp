@@ -6,6 +6,10 @@
             <h2>Add New Node</h2>
         </div>
         <div class="modal-body">
+            <div id="dvNodeKey" style="display: none;">
+                <label for="" class="form-label">Key</label>
+                <input id="inpNodeKey" name="nodeKey" type="text" class="form-control" readonly>
+            </div>
             <div>
                 <label for="" class="form-label">Name</label>
                 <input id="inpNodeName" name="nodeName" type="text" class="form-control">
@@ -61,8 +65,11 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="createNewNode()">
+            <button id="btnModalNodesNew" type="button" class="btn btn-primary" onclick="createNewNode()">
                 Add
+            </button>
+            <button id="btnModalNodesEdit" type="button" class="btn btn-primary" onclick="changeNode()">
+                Change
             </button>
             <button type="button" class="btn btn-warning" onclick="closeModal()">
                 Cancel
