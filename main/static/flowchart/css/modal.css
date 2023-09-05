@@ -13,7 +13,7 @@
     background-color: rgba(0, 0, 0, 0.4);;
 }
 
-.modal-content {
+.personal-modal-content {
     position: relative;
     background-color: #fff;
     margin: auto;
@@ -27,7 +27,7 @@
     border-radius: 0.3rem;
 }
 
-.modal-header {
+.personal-modal-header {
     padding: 2px 12px;
     background-color: #ffffff;
     color: #333;
@@ -36,13 +36,13 @@
     border-top-right-radius: 0.3rem;
 }
 
-.modal-header h2 {
+.personal-modal-header h2 {
     font-size: 1.25rem;
     margin-top: 14px;
     margin-bottom: 14px;
 }
 
-.modal-body {
+.personal-modal-body {
     padding: 2px 12px;
 }
 
