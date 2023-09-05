@@ -18,10 +18,10 @@ class loginCtrl:
             password = request.form.get("password")
 
             if username and password and AccessControlSv().login(username, password):
-                return redirect(url_for("login.index"))
+                return redirect(url_for("index.index"))
 
         if "user" in session:
-            return redirect(url_for("login.index"))
+            return redirect(url_for("index.index"))
 
         return render_template("login.html")
 
@@ -29,10 +29,3 @@ class loginCtrl:
     def logout():
         session.clear()
         return redirect(url_for("login.login"))
-
-    @bp.route("/")
-    def index():
-        return render_template(
-            "index.html",
-            titulo="Inicial",
-        )
