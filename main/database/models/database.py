@@ -27,7 +27,9 @@ class Database:
     def save(self, object_model: Any):
         with Session(engine) as session:
             session.add(object_model)
+            session.flush()
             session.commit()
+            session.refresh(object_model)
 
     def delete(self, statement) -> None:
         with Session(engine) as session:

@@ -55,11 +55,6 @@ class AccessControlSv:
                     return redirect(url_for("login.login"))
 
     def login(self, username: str, password: str) -> bool:
-        # TODO: remove
-        if username == "admin" and password == "abc123":
-            self._set_user_session(User(id=0, username=username, password=""))
-            return True
-
         statement = select(User).where(User.username == username)
         user: User = Database().get_one(statement)
 
