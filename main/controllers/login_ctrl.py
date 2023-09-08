@@ -20,6 +20,8 @@ class loginCtrl:
             if username and password and AccessControlSv().login(username, password):
                 return redirect(url_for("index.index"))
 
+            return render_template("login.html", message="Wrong username or password")
+
         if "user" in session:
             return redirect(url_for("index.index"))
 
