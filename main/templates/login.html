@@ -26,9 +26,24 @@
         margin-left: 20px;
         width: 150px;
     }
+
+    .errorMessage {
+        background-color: yellow;
+        display: flex;
+        justify-content: center;
+    }
+    .errorMessage p{
+        margin-top: 10px;
+    }
 </style>
 
 <body>
+    {% if message %}
+    <div class="errorMessage">
+        <p>{{message}}</p>
+    </div>
+    {% endif %}
+
     <div class="divMain">
         <form action="/login" method="post" class="formLogin">
             <div>
