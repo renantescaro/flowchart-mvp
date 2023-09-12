@@ -47,15 +47,39 @@
                     </div>
                 </div>
                 <div id="dvTypeParser" style="display: none;">
-                    <div>
-                        <label for="" class="form-label">Data Input</label>
-                        <textarea id="inpDataInputParser" name="dataInputParser" class="form-control" cols="30"
-                            rows="10"></textarea>
+                    <br>
+                    <div style="width: 100%; display: flex; justify-content: space-around; border-radius: 2px; border-style: groove;">
+                        <div style="width: 65%;">
+                            <label for="" class="form-label">Data Input</label>
+                            <textarea id="inpDataInputParser" name="dataInputParser" class="form-control"
+                                cols="30" rows="13">
+                            </textarea>
+                        </div>
+                        <div style="width: 30%;">
+                            <p>Use "((parameterName))" to set your data origin</p>
+                            <br>
+                            <p>Exemple</p>
+                            <div style="background-color: rgb(160, 158, 158)">
+                                <pre id="exempleInput"></pre>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label for="" class="form-label">Data Exit</label>
-                        <textarea id="inpDataExitParser" name="dataExitParser" class="form-control" cols="30"
-                            rows="10"></textarea>
+                    <br>
+                    <div style="width: 100%; display: flex; justify-content: space-around; border-radius: 2px; border-style: groove; padding-bottom: 25px;">
+                        <div style="width: 65%;">
+                            <label for="" class="form-label">Data Exit</label>
+                            <textarea id="inpDataExitParser" name="dataExitParser" class="form-control"
+                                cols="30" rows="10">
+                            </textarea>
+                        </div>
+                        <div style="width: 30%;">
+                            <p>Use "((parameterName))" to get your data</p>
+                            <br>
+                            <p>Exemple</p>
+                            <div style="background-color: rgb(160, 158, 158)">
+                                <pre id="exempleOutput"></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,3 +101,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    let exempleInput = {"hourly":{"temperature_2m":["((hourly_temperature_2m1))"],"time":["((hourly_time1))"]},"latitude":"((latitude))","longitude":"((longitude))"}
+    let exempleOutput = {"content":"latitude: ((latitude)) - longitude: ((longitude)) \nHora:((hourly_time1)) -> Temperatura: ((hourly_temperature_2m1))","tts":false}
+
+    document.getElementById("exempleInput").textContent = JSON.stringify(exempleInput, undefined, 2);
+    document.getElementById("exempleOutput").textContent = JSON.stringify(exempleOutput, undefined, 2);
+</script>
