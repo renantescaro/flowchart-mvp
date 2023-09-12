@@ -1,8 +1,8 @@
 import json
 from requests.models import Response
-from main.services.flowchart.flowchart_run_sv import FlowchartRunSv
 from faker import Faker
 from unittest.mock import patch
+from main.services.flowchart.flowchart_run_sv import FlowchartRunSv
 
 
 fake = Faker()

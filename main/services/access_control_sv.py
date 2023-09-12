@@ -3,7 +3,7 @@ import bcrypt
 import base64
 from flask import Flask, session, request, redirect, url_for, abort
 from main.database.models.api_keys_model import ApiKeys
-from main.database.models.database import *
+from main.database.models.database import select, Database
 from main.database.models.user_model import User
 
 
