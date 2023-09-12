@@ -1,0 +1,7 @@
+[run]
+omit =
+    debug/*
+    assets/*
+    **/*mock*.py
+    *__init__.py
+    *_test.py
