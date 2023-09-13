@@ -4,11 +4,11 @@ on: push
 jobs:
   build:
     env:
-      ENV_TEST: ${{env.ENV_TEST}}
+      ENV_TEST: ${{secrets.ENV_TEST}}
       ENV_TEST_2: "Fred is my cat"
-      DATABASE_URI: ${{env.DATABASE_URI}}
-      USER_ADM: ${{env.USER_ADM}}
-      USER_ADM_PASSWORD: ${{env.USER_ADM_PASSWORD}}
+      DATABASE_URI: ${{secrets.DATABASE_URI}}
+      USER_ADM: ${{secrets.USER_ADM}}
+      USER_ADM_PASSWORD: ${{secrets.USER_ADM_PASSWORD}}
 
     runs-on: ubuntu-latest
     strategy:
@@ -17,7 +17,7 @@ jobs:
   
     steps:
       - name: Print env_test 1
-        run: echo "Hello $ENV_TEST"
+        run: echo "Hello ${{env.ENV_TEST}}"
 
       - name: Print env_test 2
         run: echo "Hello $ENV_TEST_2"
