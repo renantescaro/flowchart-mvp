@@ -3,9 +3,9 @@ name: Run Unit Test via Pytest
 on: [push]
 
 env:
-  DATABASE_URI=${{ vars.DATABASE_URI }}
-  USER_ADM=${{ vars.USER_ADM }}
-  USER_ADM_PASSWORD=${{ vars.USER_ADM_PASSWORD }}
+  DATABASE_URI:${{ vars.DATABASE_URI }}
+  USER_ADM:${{ vars.USER_ADM }}
+  USER_ADM_PASSWORD:${{ vars.USER_ADM_PASSWORD }}
 
 jobs:
   build:
