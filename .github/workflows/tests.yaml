@@ -24,6 +24,13 @@ jobs:
           pip install ruff
           ruff --format=github --target-version=py310 .
         continue-on-error: true
+      - name: Create env file
+        run: |
+          touch .env
+          echo DATABASE_URI=${{ vars.DATABASE_URI }} >> .env
+          echo USER_ADM=${{ vars.USER_ADM }} >> .env
+          echo USER_ADM_PASSWORD=${{ vars.USER_ADM_PASSWORD }} >> .env
+          cat .env
       - name: Test with pytest
         run: |
           coverage run -m pytest -v -s --cov-config=.coveragerc
