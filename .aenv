@@ -1,0 +1,6 @@
+# DATABASE_URI= 'mysql://root:26061996rts@localhost/testes'
+DATABASE_URI='mysql://c8lh4x1ca4eap8y4:q64x1neur4ygk8i0@klbcedmmqp7w17ik.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/ccyamdbx77b2aiut'
+IP_APPLICATION = '0.0.0.0'
+PORT_APPLICATION = '80'
+USER_ADM='adm'
+USER_ADM_PASSWORD='jésus_salva'
