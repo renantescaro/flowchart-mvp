@@ -15,7 +15,7 @@ jobs:
   
     steps:
       - name: Print env_test
-          run: echo "Hello ENV_TEST"
+        run: echo "Hello ENV_TEST"
 
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
