@@ -4,10 +4,10 @@ on: push
 jobs:
   build:
     env:
-      ENV_TEST: ${{ vars.ENV_TEST }}
-      DATABASE_URI: ${{ vars.DATABASE_URI }}
-      USER_ADM: ${{ vars.USER_ADM }}
-      USER_ADM_PASSWORD: ${{ vars.USER_ADM_PASSWORD }}
+      ENV_TEST: ${{vars.ENV_TEST}}
+      DATABASE_URI: ${{vars.DATABASE_URI}}
+      USER_ADM: ${{vars.USER_ADM}}
+      USER_ADM_PASSWORD: ${{vars.USER_ADM_PASSWORD}}
 
     runs-on: ubuntu-latest
     strategy:
