@@ -2,6 +2,8 @@ name: Run Unit Test via Pytest
 on: push
 
 jobs:
+  environment: flowchart-mvp
+
   build:
     env:
       ENV_TEST: ${{vars.ENV_TEST}}
