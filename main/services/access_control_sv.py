@@ -3,11 +3,21 @@ import bcrypt
 import base64
 from flask import Flask, session, request, redirect, url_for, abort
 from main.database.models.api_keys_model import ApiKeys
-from main.database.models.database import *
+from main.database.models.database import select, Database
 from main.database.models.user_model import User
 
 
 class AccessControlSv:
+    @staticmethod
+    def _select_user_by_name(name: str) -> User:
+        statement = select(User).where(User.username == name)
+        return Database().get_one(statement)
+
+    @staticmethod
+    def _select_apikey_by_key(key: str) -> ApiKeys:
+        statement = select(ApiKeys).where(ApiKeys.key == key)
+        return Database().get_one(statement)
+
     @staticmethod
     def _front_auth(endpoint):
         # TODO: check endpoint request permission
@@ -28,8 +38,7 @@ class AccessControlSv:
         clean_authentication = base64.b64decode(key_encoded).decode("ascii")
         user, key = clean_authentication.split(":")
 
-        statement = select(ApiKeys).where(ApiKeys.key == key)
-        api_key: ApiKeys = Database().get_one(statement)
+        api_key: ApiKeys = AccessControlSv._select_apikey_by_key(key)
 
         if not api_key or api_key.name != user:
             raise Exception
@@ -55,8 +64,7 @@ class AccessControlSv:
                     return redirect(url_for("login.login"))
 
     def login(self, username: str, password: str) -> bool:
-        statement = select(User).where(User.username == username)
-        user: User = Database().get_one(statement)
+        user: User = self._select_user_by_name(username)
 
         if self._check_password(user, password):
             self._set_user_session(user)
@@ -89,8 +97,7 @@ class AccessControlSv:
     def change_user_password(
         self, username: str, old_password: str, new_password: str
     ) -> bool:
-        statement = select(User).where(User.username == username)
-        user: User = Database().get_one(statement)
+        user: User = self._select_user_by_name(username)
 
         if self._check_password(user, old_password):
             user.password = self.create_hash(new_password)
