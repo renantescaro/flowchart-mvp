@@ -4,11 +4,11 @@ on: push
 jobs:
   build:
     env:
-      ENV_TEST: ${{vars.ENV_TEST}}
+      ENV_TEST: ${{env.ENV_TEST}}
       ENV_TEST_2: "Fred is my cat"
-      DATABASE_URI: ${{vars.DATABASE_URI}}
-      USER_ADM: ${{vars.USER_ADM}}
-      USER_ADM_PASSWORD: ${{vars.USER_ADM_PASSWORD}}
+      DATABASE_URI: ${{env.DATABASE_URI}}
+      USER_ADM: ${{env.USER_ADM}}
+      USER_ADM_PASSWORD: ${{env.USER_ADM_PASSWORD}}
 
     runs-on: ubuntu-latest
     strategy:
@@ -16,7 +16,10 @@ jobs:
         python-version: ["3.10"]
   
     steps:
-      - name: Print env_test
+      - name: Print env_test 1
+        run: echo "Hello $ENV_TEST"
+
+      - name: Print env_test 2
         run: echo "Hello $ENV_TEST_2"
 
       - uses: actions/checkout@v3
