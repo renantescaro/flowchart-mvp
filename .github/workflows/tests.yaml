@@ -17,10 +17,22 @@ jobs:
   
     steps:
       - name: Print env_test 1
-        run: echo "Hello ${{env.ENV_TEST}}"
+        run: echo "1-> ${{env.ENV_TEST}}"
 
       - name: Print env_test 2
-        run: echo "Hello $ENV_TEST_2"
+        run: echo "2-> $ENV_TEST_2"
+
+      - name: Print env_test 3
+        run: echo "3-> ${{secrets.ENV_TEST}}"
+
+      - name: Print env_test 4
+        run: echo "4-> ${{ vars.ENV_TEST }}"
+
+      - name: Print env_test 5
+        run: echo "5-> ${{vars.ENV_TEST}}"
+
+      - name: Print env_test 6
+        run: echo "6-> $ENV_TEST"
 
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
