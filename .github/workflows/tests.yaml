@@ -3,7 +3,6 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     environment: flowchart-mvp
     env:
       ENV_TEST: ${{vars.ENV_TEST}}
@@ -12,6 +11,7 @@ jobs:
       USER_ADM: ${{secrets.USER_ADM}}
       USER_ADM_PASSWORD: ${{secrets.USER_ADM_PASSWORD}}
 
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ["3.10"]
