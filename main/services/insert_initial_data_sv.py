@@ -5,8 +5,8 @@ from main.database.models.routes_model import Routes
 from main.database.models.user_model import User
 from main.database.models.user_group_model import UserGroup
 from main.services.access_control_sv import AccessControlSv
-from main.utils.enums.dot_env import DotEnvEnum
-from main.utils.settings import Settings
+from main.helpers.enums.dot_env import DotEnvEnum
+from main.helpers.settings import Settings
 
 
 class InsertInitialData:
