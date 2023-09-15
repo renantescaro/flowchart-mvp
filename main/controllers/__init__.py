@@ -4,7 +4,6 @@ from .user_ctrl import bp as user_bp
 from .user_group_ctrl import bp as user_group_bp
 from .user_group_access_ctrl import bp as user_group_access_bp
 from .work_ctrl import bp as work_bp
-from .worker_ping_ctrl import bp as worker_ping_bp
 
 
 blueprints_ctrl = [
@@ -14,5 +13,4 @@ blueprints_ctrl = [
     user_group_bp,
     user_group_access_bp,
     work_bp,
-    worker_ping_bp,
 ]
