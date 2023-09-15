@@ -1,4 +1,4 @@
-from main.utils.converter import Converter
+from main.helpers.converter import Converter
 
 
 class Debug:

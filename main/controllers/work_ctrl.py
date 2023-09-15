@@ -1,5 +1,5 @@
 from typing import Optional
-from flask import Blueprint, render_template, request
+from flask import Blueprint, request
 
 from main.database.models.database import Database
 from main.database.models.work_model import Work
